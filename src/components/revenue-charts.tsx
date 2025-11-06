@@ -1,0 +1,170 @@
+
+"use client";
+
+import { useMemo } from 'react';
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import type { Order, MenuItem, Waiter, Table } from '@/lib/types';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { ChartContainer, ChartTooltipContent } from '@/components/ui/chart';
+import { ChartConfig } from "@/components/ui/chart"
+import { format } from 'date-fns';
+
+interface RevenueChartsProps {
+  orders: Order[];
+  menuItems: MenuItem[];
+  waiters: Waiter[];
+  tables: Table[];
+}
+
+const chartConfig = {
+  revenue: {
+    label: "Revenue",
+    color: "hsl(var(--primary))",
+  },
+} satisfies ChartConfig
+
+export default function RevenueCharts({ orders, menuItems, waiters, tables }: RevenueChartsProps) {
+  const revenueByWaiter = useMemo(() => {
+    const revenueMap = new Map<string, number>();
+    orders.forEach(order => {
+      const orderTotal = order.items.reduce((sum, item) => {
+        return sum + item.price * item.quantity;
+      }, 0);
+      const currentRevenue = revenueMap.get(order.waiterId) || 0;
+      revenueMap.set(order.waiterId, currentRevenue + orderTotal);
+    });
+    return waiters.map(waiter => ({
+      name: waiter.name,
+      revenue: revenueMap.get(waiter.id) || 0,
+    }));
+  }, [orders, waiters]);
+
+  const revenueByItem = useMemo(() => {
+    const revenueMap = new Map<string, { revenue: number, quantity: number }>();
+    orders.forEach(order => {
+      order.items.forEach(item => {
+        const menuItem = menuItems.find(mi => mi.id === item.menuItemId);
+        if (menuItem) {
+          const current = revenueMap.get(item.menuItemId) || { revenue: 0, quantity: 0 };
+          revenueMap.set(item.menuItemId, {
+            revenue: current.revenue + item.price * item.quantity,
+            quantity: current.quantity + item.quantity
+          });
+        }
+      });
+    });
+    return Array.from(revenueMap.entries()).map(([id, data]) => ({
+      name: menuItems.find(mi => mi.id === id)?.name || 'Unknown',
+      revenue: data.revenue,
+    })).sort((a, b) => b.revenue - a.revenue).slice(0, 10);
+  }, [orders, menuItems]);
+
+  const revenueByDayOfWeek = useMemo(() => {
+    const revenueMap = new Map<string, number>();
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    days.forEach(day => revenueMap.set(day, 0));
+
+    orders.forEach(order => {
+      const dayName = format(new Date(order.timestamp), 'EEEE');
+      const orderTotal = order.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      revenueMap.set(dayName, (revenueMap.get(dayName) || 0) + orderTotal);
+    });
+    
+    return days.map(day => ({ name: day, revenue: revenueMap.get(day) || 0 }));
+
+  }, [orders]);
+
+  const revenueByTable = useMemo(() => {
+    const revenueMap = new Map<number, number>();
+     orders.forEach(order => {
+      const orderTotal = order.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      revenueMap.set(order.tableNumber, (revenueMap.get(order.tableNumber) || 0) + orderTotal);
+    });
+
+    return Array.from(revenueMap.entries())
+      .map(([tableNumber, revenue]) => ({ name: `Table ${tableNumber}`, revenue}))
+      .sort((a,b) => parseInt(a.name.split(' ')[1]) - parseInt(b.name.split(' ')[1]));
+
+  }, [orders]);
+
+  return (
+    <div className="grid gap-8 md:grid-cols-2">
+      <Card>
+        <CardHeader>
+          <CardTitle className='font-headline'>Revenue by Waiter</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <ChartContainer config={chartConfig} className="h-[300px] w-full">
+            <BarChart data={revenueByWaiter}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="name" />
+              <YAxis tickFormatter={(value) => `₹${value}`} />
+              <Tooltip
+                cursor={{ fill: 'hsl(var(--muted))' }}
+                content={<ChartTooltipContent formatter={(value) => `₹${Number(value).toFixed(2)}`} />}
+              />
+              <Bar dataKey="revenue" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} />
+            </BarChart>
+          </ChartContainer>
+        </CardContent>
+      </Card>
+      <Card>
+        <CardHeader>
+          <CardTitle className='font-headline'>Top 10 Revenue by Menu Item</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <ChartContainer config={chartConfig} className="h-[300px] w-full">
+            <BarChart data={revenueByItem} layout="vertical">
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis type="number" tickFormatter={(value) => `₹${value}`} />
+              <YAxis type="category" dataKey="name" width={120} />
+              <Tooltip
+                cursor={{ fill: 'hsl(var(--muted))' }}
+                content={<ChartTooltipContent formatter={(value) => `₹${Number(value).toFixed(2)}`} />}
+              />
+              <Bar dataKey="revenue" fill="hsl(var(--primary))" radius={[0, 4, 4, 0]} />
+            </BarChart>
+          </ChartContainer>
+        </CardContent>
+      </Card>
+        <Card>
+        <CardHeader>
+          <CardTitle className='font-headline'>Revenue by Day of Week</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <ChartContainer config={chartConfig} className="h-[300px] w-full">
+            <BarChart data={revenueByDayOfWeek}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="name" />
+              <YAxis tickFormatter={(value) => `₹${value}`} />
+              <Tooltip
+                cursor={{ fill: 'hsl(var(--muted))' }}
+                content={<ChartTooltipContent formatter={(value) => `₹${Number(value).toFixed(2)}`} />}
+              />
+              <Bar dataKey="revenue" fill="hsl(var(--chart-2))" radius={[4, 4, 0, 0]} />
+            </BarChart>
+          </ChartContainer>
+        </CardContent>
+      </Card>
+       <Card>
+        <CardHeader>
+          <CardTitle className='font-headline'>Revenue by Table</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <ChartContainer config={chartConfig} className="h-[300px] w-full">
+            <BarChart data={revenueByTable}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="name" />
+              <YAxis tickFormatter={(value) => `₹${value}`} />
+              <Tooltip
+                cursor={{ fill: 'hsl(var(--muted))' }}
+                content={<ChartTooltipContent formatter={(value) => `₹${Number(value).toFixed(2)}`} />}
+              />
+              <Bar dataKey="revenue" fill="hsl(var(--chart-3))" radius={[4, 4, 0, 0]} />
+            </BarChart>
+          </ChartContainer>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}

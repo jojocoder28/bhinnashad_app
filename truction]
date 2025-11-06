@@ -1,0 +1,171 @@
+[33m72625b8[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/flutter[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mflutter[m[33m)[m first commit
+[33ma490155[m for now disable the signup, and online ordering system, i will turn it o
+[33m7521034[m when refreshing the cart becomes empty, fix this and fix the overflowing
+[33m781660b[m make proper business pages to get verified in razorpay (contact, about)
+[33ma45a969[m fix this overflow
+[33mb6a60eb[m ReferenceError: Button is not defined     at MyOrdersPage (https://6000-
+[33m52f5a91[m after successfully registered, the user should automatically logged in
+[33m1051b1f[m Make a user type 'user' so that they can access the website as user to o
+[33m209b7c2[m webhook
+[33mca8ebc2[m logo name modofied
+[33m0371b07[m still it is showing new order for approval, every 3 seconds
+[33m6ab7305[m don't need to render the toast many times, just render the toast one tim
+[33me682765[m change the bubble colour to orange, and add the notification in the top
+[33m38968af[m position the notification at the top and make it small size. And for pen
+[33m7a804e9[m paid logo modified
+[33mb43bed9[m bhinnashad logo name changed
+[33m780ecfc[m when clicking on print bill or view bill, no printing window is not open
+[33md53465b[m for pickup order, after clicking on marked as prepared, automatically ge
+[33me9d01f0[m for add option for manager to mark as served, and for self pickup order,
+[33md4e9007[m I see this error with the app, reported by NextJS, please fix it. The er
+[33mba23d22[m in the paid bill, make the PAID high contrast so that it can reflect wel
+[33m850d901[m add another feature, for manager, add an option for taking self pickup o
+[33mbe8a8c6[m whenever a waiter takes an order, immediately send notification to the m
+[33me20243d[m add option for manager to modify and add menu
+[33m7654000[m add feature for manager to take order. if the manager take order then th
+[33m6fdf8f6[m change the name Vinnoswad to Bhinna Shad everywhere, in the title, in th
+[33m5edc2d5[m in the bill add amount for each item by multiplying the rate with qty  a
+[33m543cfb4[m change the name Vinnoswad to Bhinno Shad everywhere, in the title, in th
+[33m4e24073[m in all the menu and also for taking order, add option to filter by categ
+[33mdf59226[m I see this error with the app, reported by NextJS, please fix it. The er
+[33mb77e021[m adjust the overflowing in the rate, for bill print
+[33m35301fb[m do you remember not to  print the start and end blank space for the kitc
+[33meba7586[m add a bill in the exact same format and same style for the kitchen where
+[33m2252771[m remove the qr code from bill
+[33mdf2bc6c[m Uncaught ReferenceError: OrderForm is not defined     at P (page-d6c2d3a
+[33ma55f54a[m the page is loading so frequently that waiter can not add order,   it is
+[33mffb3936[m remove the amount, only add subtotal at the end of each item and grand t
+[33m48e788a[m still overflowing, adjust the table structure
+[33m041d5cd[m the rate amount is not readable, decrease the font size to resolve this
+[33m698764d[m adjust the overflowing in the rate, amount
+[33mc534692[m increase the font size and adjust overflowing side wise
+[33m1dada01[m add some padding or margin at the side left and right
+[33md29b8d5[m look at the blank space at the end, i don't want that
+[33m35ad230[m use atleast some padding to left and right. and there is very long blank
+[33m08d7ba6[m remove any kind of blank space at the beginning and also at at the end,
+[33mf5d8485[m adjust the printing size for MP-58(48)x210mm size
+[33m7415533[m when we are updating the order status from an account, the status is not
+[33m919ecb5[m don't use kitchen account, use this mechanism delete the kitchen, the ac
+[33m202aad0[m ReferenceError: Button is not defined     at AdminView (https://6000-fir
+[33ma348bae[m ReferenceError: onDeleteMenuItem is not defined     at AdminPage (https:
+[33md890866[m automatic plan is already implemented on admin end, add the functionalit
+[33m2c8cf55[m for mobile view remove the staff login button at the top, write a small
+[33m2fe3153[m remove gstin number from bill
+[33mfd5d4d6[m add restaurant logo in the bill
+[33mbb4c9c4[m ReferenceError: useMemo is not defined     at OrderCard (https://6000-fi
+[33m4b46853[m in the served order in the manager section, show only the orders which a
+[33m7fc2ee4[m one problem is there for billing, suppose waiter is having 3 orders, he
+[33mdbbe9ce[m add the logic that when a waiter is taking order from a table, only that
+[33mbd3b3b7[m The bill is managed by the waiter
+[33mef6b54f[m optimize for mobile screen
+[33me35e36c[m the images are not fit in the card
+[33mc8f9eff[m Great, I like the animation. Add some delicious abstract background for
+[33m3af58c9[m can you add some beautiful delicious css animation at the background in
+[33mba5612e[m add a page without authentication (login) anyone can see the full menu o
+[33m6b8c56c[m change the green colour also to dark brown as in the logo
+[33mca4ca0a[m now as the colour presents in the logo make the whole website theme for
+[33m62b9a45[m the problem still exists, when the screen size is small the logo is ther
+[33m088d76b[m when in the mobile view i can see the logo but when in the desktop view
+[33m7661eae[m this is the logo of the restaurant, named logo_vinnoswad.png, replace th
+[33mbc244b6[m Comment out just the sign up functionality from the website, only admin
+[33m67d5415[m make the waiter page fully optimized for mobile devices (responsive)
+[33md5ff5a6[m Don't add tax in the bill make the selling price as the final price and
+[33m96ae264[m icon changed
+[33meca4aaa[m modify the dashboard tabs for mobile device as it is overflowing vertica
+[33m4a35895[m remove the first time setup as admin concept
+[33m5aa5c80[m after clicking on print button the page is closing and not printing
+[33mfa860a4[m add a graph in the admin panel to view orders and revenue per table and
+[33m4340bef[m the manager dashboard options are not align horizontally, fix this
+[33m24d86f9[m add all the order details and bill printing also in the manager end
+[33mc0bf7e0[m in the order history add option to print the paid bill
+[33mfd055ea[m the paid bill section is overflowing on top
+[33m7059d88[m don't disable the handle close billing modal, instead add a section to p
+[33m7fef190[m when clicking on confirm payment the paid bill is vanished, instead add
+[33mf08e75c[m bill print added
+[33m638e054[m bill print added
+[33mef614f8[m change your handlePrint() so it prints only the bill and not the whole m
+[33m60a369b[m it is now printing completely blank
+[33m161cd8e[m in the printed bill the top position is containing blank space, remove t
+[33mbc89469[m add a option after the payment to generate the bill as paid and before p
+[33m82a5b37[m 117-NH, Sarisha Ashram More, Diamond Harbour, South 24 Parganas,  PIN -
+[33m8dfd869[m <div role="dialog" id="radix-«rh»" aria-describedby="radix-«rj»" aria-la
+[33m9a8435e[m the text of the bill card is overflowing and it is outside the card, fix
+[33mdf48a1d[m fix this styling
+[33m6c4ea7f[m i have a mobile printer, i want to print the bill on mobile printer how
+[33m4c3aa44[m add fallback upi id to the env as dasjojo7-1@okicici and load from the e
+[33mbc2226d[m if razorpay api key is not available then do the previous qr code based
+[33m59dee67[m I see this error with the app, reported by NextJS, please fix it. The er
+[33mde3fd6f[m initialize razorpay payment gateway
+[33mcb422a2[m how to integrate payment gateway for bill payment and bill generation
+[33m9fd28d0[m remove mock data
+[33m044d75b[m create a button on purchaseorderform above the destructive button to con
+[33mf428089[m add a confirmation button for each item above the delete button to refle
+[33mcf25436[m I want to add a button to add the particular item and the add item butto
+[33m25cbdd4[m in the create purchase order when I click on add item it is only then mo
+[33m1c70361[m add add supplier fiunctionality
+[33m137a74b[m add new purchase order funstionality
+[33ma32f1eb[m add edit recipe functionality
+[33m58c7ef4[m create the add stock item form to add stock items for inventory manageme
+[33m69f20f7[m i want to do the supply chain management and profit loss calculation fro
+[33m7a8818e[m Error: Invalid src prop (https://res.cloudinary.com/drw148izx/image/uplo
+[33mf9ceb5c[m when i am trying to uploading jpeg image of the menu it is showing that
+[33m2a0ae3c[m ReferenceError: FormDescription is not defined     at Object.render (htt
+[33m5846673[m make the changes
+[33m649b4b5[m modify the menu section
+[33m7271eb9[m write readme.md for this project
+[33maee6606[m first commit
+[33mf34a524[m change databse collection name back to eateryflow
+[33mf09ea4e[m change the name of the restaurant from EateryFlow to Vinnoswad, replace
+[33mb4e8886[m use different library for qr code generation
+[33ma7bb544[m qr code is not generating
+[33m64047bd[m upi://pay?pa=UPIID&pn=Name&am=Amount&cu=INR
+[33mee87ac3[m the qr code is not generating, it should generate a qr code by scanning
+[33m75b4921[m my upi id is dasjojo7-1@okicici
+[33m65c03aa[m after clicking on close in the bill section the unpaid bill is vanished,
+[33mc8d2cfd[m in india there is upi, so if i want to generate qr code for the customer
+[33mf20a55c[m add in the manager end also
+[33m0293b26[m modify the timestamp with human readable form, break the attribute as da
+[33m8a4c2dc[m in the reports, write the order names, waiter names, not the ids
+[33m2915502[m download report in csv file
+[33mc13caac[m add option for the admin to download full details of the restaurant incl
+[33m3a4ee1c[m add option for the waiter to edit and cancel taken order
+[33m1cedb1d[m yes proceed
+[33m83df549[m add another panel of cancelled items list with cause of cancellation
+[33m7c0af43[m make the list of order served with revenue, table number, waiter name in
+[33m4a369f7[m give admin full access to check every table status, statistics, every wa
+[33mb777fb2[m make one modification
+[33mca40e44[m I see this error with the app, reported by NextJS, please fix it. The er
+[33mf1ee64d[m in the revenue calculation, it is calculating the revenue based on the c
+[33mdc969ea[m view cancelled order in the manager dashboard and also the statistics on
+[33mb464f75[m add option to cancel order from manager end and from kitchen with the cu
+[33md86cbdd[m look into the case and do necessary modification
+[33m2ad67cc[m Error: <p> cannot contain a nested <div>. See this log for the ancestor
+[33m90f05c8[m after notify the waiter, the order must be in the manager's dashboard un
+[33ma7546f6[m add kitchen as a new user and modify the order flow into this
+[33m6d6005a[m view manager's profile also
+[33mcb67270[m in the admin page, add view profile for each of the user to monitor the
+[33mebbf00d[m add the full management dashboard in the admin panel, for managing manag
+[33m05048ed[m make the system like that
+[33mddde8a9[m admin can't sign up
+[33mdf5696a[m add a system that, if a new waiter or manager sign up then the admin mus
+[33m1ccbfe4[m add loading page for buffering
+[33mf9c3d77[m print the auth token session token in the console for debugging
+[33m50780be[m check the auth code and check how the auth token is stored and then retr
+[33md570665[m still not working
+[33mde6a421[m after successfully logged in the web page is not redirecting to the actu
+[33mbdb6c03[m after login page is not redirected to the actual home page
+[33m2c49d77[m I see this error with the app, reported by NextJS, please fix it. The er
+[33m2821e67[m I see this error with the app, reported by NextJS, please fix it. The er
+[33ma45af1e[m add sign up and sign in page , add role option for user type, add passwo
+[33m8c49e2e[m now add authentication and make separate interface for waiter manager an
+[33m2300d88[m reflect the total items ordered and served per day live in the manager s
+[33m6d63350[m make all the order to rupees instead of dollar
+[33mc80ddb8[m make a system that, if a waiter is taking order on a table then only tha
+[33m99f414d[m in the new order section the tables 2 5 and 8 are not showing
+[33m54fee64[m clear all the orders of table 5 8 and 2
+[33m1a2acba[m store the table information in a database schema and fetch all the table
+[33m0f732c5[m I see this error with the app, reported by NextJS, please fix it. The er
+[33m23fbc55[m connect mongodb database to handle the backend data store and retrieve
+[33m568b3f0[m I see this error with the app, reported by NextJS, please fix it. The er
+[33mca53bcd[m Initial prototype
+[33mef5f6bc[m Initialized workspace with Firebase Studio
