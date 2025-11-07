@@ -77,10 +77,7 @@ class OrdersNotifier extends StateNotifier<OrdersState> {
 
   Future<bool> updateOrderStatus(String orderId, String status) async {
     try {
-      final updatedOrder = await _apiService.updateOrder(
-        orderId,
-        {'status': status},
-      );
+      final updatedOrder = await _apiService.updateOrderStatus(orderId, status);
 
       final updatedOrders = state.orders.map((order) {
         return order.id == orderId ? updatedOrder : order;
@@ -96,7 +93,7 @@ class OrdersNotifier extends StateNotifier<OrdersState> {
 
   Future<bool> approveOrder(String orderId) async {
     try {
-      final updatedOrder = await _apiService.approveOrder(orderId);
+      final updatedOrder = await _apiService.updateOrderStatus(orderId, 'approved');
 
       final updatedOrders = state.orders.map((order) {
         return order.id == orderId ? updatedOrder : order;
@@ -112,7 +109,7 @@ class OrdersNotifier extends StateNotifier<OrdersState> {
 
   Future<bool> markOrderReady(String orderId) async {
     try {
-      final updatedOrder = await _apiService.markOrderReady(orderId);
+      final updatedOrder = await _apiService.updateOrderStatus(orderId, 'prepared');
 
       final updatedOrders = state.orders.map((order) {
         return order.id == orderId ? updatedOrder : order;
@@ -128,7 +125,7 @@ class OrdersNotifier extends StateNotifier<OrdersState> {
 
   Future<bool> markOrderServed(String orderId) async {
     try {
-      final updatedOrder = await _apiService.markOrderServed(orderId);
+      final updatedOrder = await _apiService.updateOrderStatus(orderId, 'served');
 
       final updatedOrders = state.orders.map((order) {
         return order.id == orderId ? updatedOrder : order;
@@ -142,9 +139,9 @@ class OrdersNotifier extends StateNotifier<OrdersState> {
     }
   }
 
-  Future<bool> cancelOrder(String orderId) async {
+  Future<bool> cancelOrder(String orderId, String reason) async {
     try {
-      await _apiService.cancelOrder(orderId);
+      await _apiService.cancelOrder(orderId, reason);
 
       final updatedOrders = state.orders
           .where((order) => order.id != orderId)

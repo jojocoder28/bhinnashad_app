@@ -39,7 +39,8 @@ class AuthNotifier extends StateNotifier<AuthState> {
   final ApiService _apiService;
   final StorageService _storageService;
 
-  AuthNotifier(this._apiService, this._storageService) : super(const AuthState()) {
+  AuthNotifier(this._apiService, this._storageService)
+      : super(const AuthState()) {
     _checkAuthStatus();
   }
 
@@ -65,10 +66,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
     state = state.copyWith(isLoading: true, error: null);
 
     try {
-      final response = await _apiService.login({
-        'email': email,
-        'password': password,
-      });
+      final response = await _apiService.login(email, password);
 
       final token = response['token'] as String;
       final userJson = response['user'] as Map<String, dynamic>;
@@ -78,7 +76,8 @@ class AuthNotifier extends StateNotifier<AuthState> {
       if (!user.isApproved) {
         state = state.copyWith(
           isLoading: false,
-          error: 'Your account is pending approval. Please contact an administrator.',
+          error:
+              'Your account is pending approval. Please contact an administrator.',
         );
         return false;
       }
@@ -102,7 +101,8 @@ class AuthNotifier extends StateNotifier<AuthState> {
     }
   }
 
-  Future<bool> signup(String name, String email, String password, String role) async {
+  Future<bool> signup(
+      String name, String email, String password, String role) async {
     state = state.copyWith(isLoading: true, error: null);
 
     try {
@@ -131,7 +131,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
   Future<void> logout() async {
     await _storageService.clearAuthToken();
     await _storageService.clearUserData();
-    
+
     state = const AuthState();
   }
 
@@ -149,7 +149,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
 final dioProvider = Provider<Dio>((ref) {
   final dio = Dio();
   final storageService = StorageService();
-  
+
   // Add auth interceptor
   dio.interceptors.add(
     InterceptorsWrapper(
@@ -162,7 +162,7 @@ final dioProvider = Provider<Dio>((ref) {
       },
     ),
   );
-  
+
   return dio;
 });
 

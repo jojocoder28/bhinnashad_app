@@ -115,7 +115,6 @@ class MenuNotifier extends StateNotifier<MenuState> {
     final lowercaseQuery = query.toLowerCase();
     return state.menuItems.where((item) {
       return item.name.toLowerCase().contains(lowercaseQuery) ||
-             item.description.toLowerCase().contains(lowercaseQuery) ||
              item.category.toLowerCase().contains(lowercaseQuery);
     }).toList();
   }
