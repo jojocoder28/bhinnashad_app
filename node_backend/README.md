@@ -169,7 +169,7 @@ Password for all: `123456`
 
 MongoDB connection is configured in `.env`:
 ```
-MONGODB_URI=mongodb+srv://marik:iwcqP1s38lXz6Izq@cluster0.heyuomr.mongodb.net/bhinna_shad?retryWrites=true&w=majority&appName=Cluster0
+MONGODB_URI=enter_your_mongodb_uri
 ```
 
 ## Error Handling

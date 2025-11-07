@@ -135,7 +135,7 @@ PORT=9003
 ### MongoDB Connection Error
 Check your `.env` file has the correct MongoDB URI:
 ```
-MONGODB_URI=mongodb+srv://marik:iwcqP1s38lXz6Izq@cluster0.heyuomr.mongodb.net/bhinna_shad?retryWrites=true&w=majority&appName=Cluster0
+MONGODB_URI=enter_your_mongodb_uri
 ```
 
 ### JWT Secret
