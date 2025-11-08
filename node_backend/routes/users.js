@@ -149,4 +149,59 @@ router.patch(
   }
 );
 
+// User login (public)
+router.post(
+  '/login',
+  [
+    body('email').isEmail().withMessage('Valid email is required'),
+    body('password').notEmpty().withMessage('Password is required'),
+    validate,
+  ],
+  async (req, res, next) => {
+    try {
+      const { email, password } = req.body;
+
+      // Find user by email
+      const user = await User.findOne({ email });
+      if (!user) {
+        return res.status(401).json({ message: 'Invalid email or password' });
+      }
+
+      // Compare password
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (!isMatch) {
+        return res.status(401).json({ message: 'Invalid email or password' });
+      }
+
+      // Check approval status (optional)
+      if (user.status !== 'approved') {
+        return res.status(403).json({ message: 'User not approved yet' });
+      }
+
+      // Generate JWT token
+      const jwt = require('jsonwebtoken');
+      const token = jwt.sign(
+        { userId: user._id, role: user.role },
+        process.env.JWT_SECRET,
+        { expiresIn: '7d' }
+      );
+
+      res.json({
+        message: 'Login successful',
+        token,
+        user: {
+          id: user._id,
+          name: user.name,
+          email: user.email,
+          role: user.role,
+          status: user.status,
+        },
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+
 module.exports = router;
